@@ -53,11 +53,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\FinisherScreen.cs" />
+     <Compile Include="Assets\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\Ability\Ability.cs" />
      <Compile Include="Assets\Scripts\Ability\AbilityDespenser.cs" />
      <Compile Include="Assets\Scripts\Ability\Dash.cs" />
+     <Compile Include="Assets\Scripts\Core\GameState.cs" />
      <Compile Include="Assets\Scripts\Core\GlobalEventManager.cs" />
+     <Compile Include="Assets\Scripts\Core\LoaderInfoScreen.cs" />
+     <Compile Include="Assets\Scripts\Core\PauseController.cs" />
+     <Compile Include="Assets\Scripts\Core\Screen.cs" />
+     <Compile Include="Assets\Scripts\Core\ScreenManager.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Walker.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerAbility.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerDeath.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Traps\SnakePlatform.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">

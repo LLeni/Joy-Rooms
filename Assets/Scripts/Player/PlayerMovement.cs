@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq.Expressions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,12 +29,21 @@ public class PlayerMovement : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2*Mathf.Abs(gravity) * minJumpHeight);
         currentCountJumps = 0;
         body.freezeRotation = true;
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
         PerformJump();
         Recover();
+
+        
+    }
+
+    private  void Update()
+    {
+       // Debug.Log(currentCountJumps);
     }
 
 
@@ -50,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space) && currentCountJumps < 2){
              body.velocity = new Vector2(body.velocity.x, maxJumpVelocity);
-
+                    Debug.Log("dddd" + currentCountJumps);
 
         }  
         if(Input.GetKeyUp(KeyCode.Space)){
@@ -58,9 +68,9 @@ public class PlayerMovement : MonoBehaviour
                 body.velocity = new Vector2(body.velocity.x, minJumpVelocity);
             }
             currentCountJumps++;
-
+                    Debug.Log(currentCountJumps);
         }
-        Debug.Log(currentCountJumps);
+
 
     }
 
@@ -70,5 +80,9 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.DrawRay(boxCollider.bounds.center, boxCollider.bounds.size, Color.green);
         return raycastHit2D.collider != null;
+    }
+
+    private void OnGameStateChanged(GameState newGameState){
+        enabled = newGameState == GameState.Gameplay;
     }
 }

@@ -5,14 +5,8 @@ using UnityEngine;
 public class GlobalEventManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Application.targetFrameRate = 300;
     }
 }

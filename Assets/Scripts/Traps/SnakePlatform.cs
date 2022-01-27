@@ -1,10 +1,10 @@
-﻿
+﻿using System.Data;
 using System.Collections.Concurrent;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class SnakePlatform : MonoBehaviour
 {
     [SerializeField] private GameObject[] _destinations;
     [SerializeField] private GameObject[] _blocks;
@@ -14,37 +14,34 @@ public class MovingPlatform : MonoBehaviour
     private int[] _blockIdNextPositions;
     private bool[] _isStraightPath;
     //private bool _isStraightPath;
-    private Vector2 _nextPosition;
-    private int _idNextPosition;
+
+
+    private LineRenderer lr;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //_timeLeftForDestination = _timeForDestination;
-       // _isReturn = false;
-
-       // Vector2 positionFirstBlock = _blocks[0].GetComponent<Transform>().position;
-        //float distance = Mathf.Sqrt(Mathf.Pow(positionFirstBlock.x - _endX,2) +  Mathf.Pow(positionFirstBlock.y - _endY,2));
-        
-        //TODO: Если я ошибочно сделаю различные и иксы, и игреки, то вывести ошибку
-        // if(_destination.x == positionFirstBlock.x){
-        //     _speed = _timeForDestination / Mathf.Abs(positionFirstBlock.y - _destination.y);
-        // } else {
-        //     _speed = _timeForDestination / Mathf.Abs(positionFirstBlock.x - _destination.x);
-        // }  
-        // _nextPosition = _destinations[0].transform.position;
-        // _idNextPosition = 0;
-        
         _blockIdNextPositions = new int[_destinations.Length];
+        _isStraightPath = new bool[_destinations.Length];
         for(int i = 0; i < _destinations.Length; i++){
             _blockIdNextPositions[i] = 1;
+            _isStraightPath[i] = true;
         }
+
+        lr = GetComponent<LineRenderer>();  
+        lr.material.mainTextureScale = new Vector2(1f / 1, 1.0f);
+        DrawPath();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        MoveBlocks();
         for(int iBlock = 0; iBlock < _blocks.Length; iBlock++){
             GameObject block = _blocks[iBlock];
             Vector2 nextPos = _destinations[_blockIdNextPositions[iBlock]].transform.position;
@@ -63,8 +60,28 @@ public class MovingPlatform : MonoBehaviour
             //if(((_blocks[0].transform.position.x == _nextPosition.x) && (_blocks[0].transform.position.y == _nextPosition.y)) || ((_blocks[_blocks.Length-1].transform.position.x == _nextPosition.x) && (_blocks[_blocks.Length-1].transform.position.y == _nextPosition.y))){
         }
         
-        Debug.Log(_idNextPosition);
+        //Debug.Log(_blockIdNextPositions[0]);
 
+    }
+
+    private void MoveBlocks(){
+        for(int iBlock = 0; iBlock < _blocks.Length; iBlock++){
+            GameObject block = _blocks[iBlock];
+            Vector2 nextPos = _destinations[_blockIdNextPositions[iBlock]].transform.position;
+            block.transform.position = Vector2.MoveTowards(block.transform.position, nextPos, _speed * Time.deltaTime);
+            if(iBlock == 0 || iBlock == _blocks.Length - 1){
+                if(block.transform.position.x == nextPos.x && block.transform.position.y == nextPos.y){
+                    ChooseBlockNextPosition(iBlock);
+                }
+            } else {
+                //С учетом позиции в "змее"
+                if(block.transform.position.x == nextPos.x - iBlock && block.transform.position.y == nextPos.y - iBlock){
+                    ChooseBlockNextPosition(iBlock);
+                }
+            }
+
+            //if(((_blocks[0].transform.position.x == _nextPosition.x) && (_blocks[0].transform.position.y == _nextPosition.y)) || ((_blocks[_blocks.Length-1].transform.position.x == _nextPosition.x) && (_blocks[_blocks.Length-1].transform.position.y == _nextPosition.y))){
+        }
     }
 
     private void ChooseBlockNextPosition(int indexBlock){
@@ -85,7 +102,6 @@ public class MovingPlatform : MonoBehaviour
                 }
         }
 
-
         if(_isStraightPath[indexBlock]){
             _blockIdNextPositions[indexBlock]++;
         } else {
@@ -94,4 +110,16 @@ public class MovingPlatform : MonoBehaviour
         //return _destinations[_idNextPosition].transform.position;
         
     }
+
+    private void DrawPath(){
+        lr.positionCount = _destinations.Length;
+        for(int i = 0; i < _destinations.Length; i++){
+            lr.SetPosition(i, _destinations[i].transform.position);
+        }
+    }
+
+    private void OnGameStateChanged(GameState newGameState){
+        enabled = newGameState == GameState.Gameplay;
+    }
+    
 }
