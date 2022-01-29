@@ -8,10 +8,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float maxJumpHeight = 5;
-    [SerializeField] private float minJumpHeight = 1;
-    [SerializeField] private float timeToJumpVertex = .6f;
+    [SerializeField] private float maxJumpHeight;
+    [SerializeField] private float minJumpHeight;
+    [SerializeField] private float timeToJumpVertex;
     private Rigidbody2D body;
+    private Transform transform;
     private BoxCollider2D boxCollider;
 
     private int currentCountJumps;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
+        transform = GetComponent<Transform>();
         boxCollider = GetComponent<BoxCollider2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpVertex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpVertex;
@@ -34,15 +36,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
-        PerformJump();
-        Recover();
 
-        
     }
 
     private  void Update()
     {
+                body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
+        PerformJump();
+        Recover();
        // Debug.Log(currentCountJumps);
     }
 
@@ -57,12 +58,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void PerformJump(){
 
-
-        if(Input.GetKeyDown(KeyCode.Space) && currentCountJumps < 2){
+        //TODO: временно как два разных условия
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Debug.Log(currentCountJumps + "после нажатия");
+            if(currentCountJumps < 2){
              body.velocity = new Vector2(body.velocity.x, maxJumpVelocity);
-                    Debug.Log("dddd" + currentCountJumps);
+                    Debug.Log("Прыыыгаем" + currentCountJumps);
 
-        }  
+             }
+        }
+
         if(Input.GetKeyUp(KeyCode.Space)){
             if(body.velocity.y > minJumpVelocity){
                 body.velocity = new Vector2(body.velocity.x, minJumpVelocity);
@@ -75,14 +80,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool isGrounded(){
-        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.01f, groundLayer);
+        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         
 
-        //Debug.DrawRay(boxCollider.bounds.center, boxCollider.bounds.size, Color.green);
+        Debug.DrawRay(boxCollider.bounds.center + new Vector3(boxCollider.bounds.extents.x - 0.1f, 0), Vector2.down * (boxCollider.bounds.extents.y + 0.1f), Color.green);
         return raycastHit2D.collider != null;
     }
 
     private void OnGameStateChanged(GameState newGameState){
         enabled = newGameState == GameState.Gameplay;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collition)
+    {
+        if(collition.gameObject.CompareTag("Platform")){
+            transform.SetParent(collition.transform);
+        }
+    }
+
+    
+    private void OnCollisionExit2D(Collision2D collition)
+    {
+        if(collition.gameObject.CompareTag("Platform")){
+            transform.SetParent(null);
+        }
+    
     }
 }

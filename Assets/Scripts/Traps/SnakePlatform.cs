@@ -9,10 +9,12 @@ public class SnakePlatform : MonoBehaviour
     [SerializeField] private GameObject[] _destinations;
     [SerializeField] private GameObject[] _blocks;
     [SerializeField] private float _speed;
+    [SerializeField] private bool isPathShowed;
 
     //private Vector2[] _blockNextPosition;
     private int[] _blockIdNextPositions;
     private bool[] _isStraightPath;
+    
     //private bool _isStraightPath;
 
 
@@ -30,9 +32,12 @@ public class SnakePlatform : MonoBehaviour
             _isStraightPath[i] = true;
         }
 
-        lr = GetComponent<LineRenderer>();  
-        lr.material.mainTextureScale = new Vector2(1f / 1, 1.0f);
-        DrawPath();
+
+        if(isPathShowed){
+            lr = GetComponent<LineRenderer>();  
+            lr.material.mainTextureScale = new Vector2(1f / 1, 1.0f);
+            DrawPath();
+        }
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
@@ -120,6 +125,10 @@ public class SnakePlatform : MonoBehaviour
 
     private void OnGameStateChanged(GameState newGameState){
         enabled = newGameState == GameState.Gameplay;
+    }
+
+    private void doOnTheCollision(){
+
     }
     
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameStateManager
 {
+    
     private static GameStateManager _instance;
     public static GameStateManager Instance
     {

@@ -40,9 +40,10 @@ public class ScreenManager : MonoBehaviour
 
     public void RestartScreen(){
         //Instantiate(playerPrefab, screens[numberScreen].GetComponent<Screen>().respawnPlace.position, Quaternion.identity);
-        Debug.Log("LOoooooOL");
+        Debug.Log("copyScreens [concrete] = " + copyScreens[numberScreen] );
         copyScreens[numberScreen].SetActive(true);
        copyScreens[numberScreen] = GameObject.Instantiate(copyScreens[numberScreen]);
+               Debug.Log("copyScreens [concrete] = " + copyScreens[numberScreen] );
         
     }
 

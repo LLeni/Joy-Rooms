@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerAbility.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDeath.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Traps\ClayPlatform.cs" />
      <Compile Include="Assets\Scripts\Traps\SnakePlatform.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>E:/Unity Projects/ProjectTest/Joy Rooms/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
