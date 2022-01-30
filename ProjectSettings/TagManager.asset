@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Platform
+  - PainfulTrap
   layers:
   - Default
   - TransparentFX

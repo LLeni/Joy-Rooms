@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Data.Common;
+using System.Data;
 using System.Collections.Concurrent;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,22 +52,49 @@ public class SnakePlatform : MonoBehaviour
             GameObject block = _blocks[iBlock];
             Vector2 nextPos = _destinations[_blockIdNextPositions[iBlock]].transform.position;
             block.transform.position = Vector2.MoveTowards(block.transform.position, nextPos, _speed * Time.deltaTime);
-            if(iBlock == 0 || iBlock == _blocks.Length - 1){
+            
+            if(_blockIdNextPositions[iBlock] == 0 || _blockIdNextPositions[iBlock] == _blockIdNextPositions.Length - 1){
+                //if(_blocks.Length == 2){
+                    Vector2 offset = GetOffSetBlock(iBlock);
+                    double imprecision= 0.05;//допустимая погрешность 
+                    
+                                double d= 777.500;
+                    double f= 777.600;
+
+                   // if (f + imprecision > d & f - imprecision < d)
+                    if(iBlock == 1 && !_isStraightPath[iBlock]){
+                        Debug.Log("offset = " + offset.x + " " + offset.y);
+                      
+                        if(block.transform.position.x + imprecision >  nextPos.x + offset.x
+                            && block.transform.position.x - imprecision < nextPos.x + offset.x 
+                            && block.transform.position.y + imprecision > nextPos.y + offset.y
+                            && block.transform.position.y - imprecision < nextPos.y + offset.y){
+                            Debug.Log("ff");
+                            block.transform.position = nextPos + offset;
+                            ChooseBlockNextPosition(iBlock);
+                        }
+                    }
+                    if(iBlock == 0 && _isStraightPath[iBlock]){
+                      
+                        Debug.Log(nextPos.x);
+                         Debug.Log(block.transform.position.x);
+                         Debug.Log("offset = " + offset.x + " " + offset.y);
+                        if(block.transform.position.x + imprecision >  nextPos.x + offset.x
+                            && block.transform.position.x - imprecision < nextPos.x + offset.x 
+                            && block.transform.position.y + imprecision > nextPos.y + offset.y
+                            && block.transform.position.y - imprecision < nextPos.y + offset.y){
+                            Debug.Log("ggasdasdadasdg");
+                            block.transform.position = nextPos + offset;
+                            ChooseBlockNextPosition(iBlock);
+                        }
+                  //  }
+                }
+            } else {
                 if(block.transform.position.x == nextPos.x && block.transform.position.y == nextPos.y){
                     ChooseBlockNextPosition(iBlock);
                 }
-            } else {
-                //С учетом позиции в "змее"
-                if(block.transform.position.x == nextPos.x - iBlock && block.transform.position.y == nextPos.y - iBlock){
-                    ChooseBlockNextPosition(iBlock);
-                }
             }
-
-            //if(((_blocks[0].transform.position.x == _nextPosition.x) && (_blocks[0].transform.position.y == _nextPosition.y)) || ((_blocks[_blocks.Length-1].transform.position.x == _nextPosition.x) && (_blocks[_blocks.Length-1].transform.position.y == _nextPosition.y))){
-        }
-        
-        //Debug.Log(_blockIdNextPositions[0]);
-
+          }
     }
 
     private void MoveBlocks(){
@@ -127,8 +155,38 @@ public class SnakePlatform : MonoBehaviour
         enabled = newGameState == GameState.Gameplay;
     }
 
-    private void doOnTheCollision(){
+    private Vector2 GetOffSetBlock(int indexBlock){
+        Vector2 previousDestinationPos;
+        Vector2 nextDestinationPos = _destinations[_blockIdNextPositions[indexBlock]].transform.position;
+        if(_isStraightPath[indexBlock]){
+            previousDestinationPos = _destinations[_blockIdNextPositions[indexBlock] - 1].transform.position;
+        } else {
+            previousDestinationPos = _destinations[_blockIdNextPositions[indexBlock] + 1].transform.position;
+        }
 
+        float x = 0;
+        float y = 0;
+
+        if(nextDestinationPos.x > previousDestinationPos.x){
+            x = -1;
+        }
+        if(nextDestinationPos.x == previousDestinationPos.x){
+            x = 0;
+        }
+        if(nextDestinationPos.x < previousDestinationPos.x){
+            x = 1;
+        }
+
+        if(nextDestinationPos.y > previousDestinationPos.y){
+            y = -1;
+        }
+        if(nextDestinationPos.y == previousDestinationPos.y){
+            y = 0;
+        }
+        if(nextDestinationPos.y < previousDestinationPos.y){
+            y = 1;
+        }
+
+        return new Vector2(x, y);
     }
-    
 }

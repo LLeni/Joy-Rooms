@@ -91,9 +91,12 @@ public class PlayerMovement : MonoBehaviour
         enabled = newGameState == GameState.Gameplay;
     }
 
+    private GameObject platformGameObject;
+
     private void OnCollisionEnter2D(Collision2D collition)
     {
         if(collition.gameObject.CompareTag("Platform")){
+            //platformGameObject = collition.gameObject;
             transform.SetParent(collition.transform);
         }
     }
@@ -101,7 +104,9 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnCollisionExit2D(Collision2D collition)
     {
-        if(collition.gameObject.CompareTag("Platform")){
+        Debug.Log("asdasdasd");
+        if(collition.gameObject.CompareTag("Platform") ){
+            //platformGameObject = null;
             transform.SetParent(null);
         }
     
