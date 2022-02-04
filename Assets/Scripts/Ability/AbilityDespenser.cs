@@ -4,16 +4,52 @@ using UnityEngine;
 
 public class AbilityDespenser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    [SerializeField] private AbilityName abilityName;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private Sprite[] spriteArray;
+    private Ability ability;
+    private SpriteRenderer spriteRenderer;
+    enum AbilityName {
+        Dash,
+        SecondJump,
+        None,
+        Refresh
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Start()
     {
-        if(collision.tag == "Player"){
-            
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        switch(abilityName){
+            case AbilityName.Dash: 
+                Debug.Log("куку");
+                ability = new Dash();
+                spriteRenderer.sprite = spriteArray[0];
+                break;
+            case AbilityName.SecondJump:
+                ability = new SecondJump();
+                spriteRenderer.sprite = spriteArray[1];
+                break;
+            case AbilityName.None:
+                ability = null;
+                spriteRenderer.sprite = spriteArray[2];
+                break;
+            case AbilityName.Refresh:
+                //перезаряжаем текущий навык
+                spriteRenderer.sprite = spriteArray[3];
+                break;
         }
+
+        Debug.Log("ability check = " + (ability == null));
+
+        Debug.Log("check dash: " + (new Dash() == null));
     }
+
+
+
+    public Ability GetAbility(){
+        Debug.Log("kinda ability = " + (ability == null));
+        return ability;
+    }
+    
 }
