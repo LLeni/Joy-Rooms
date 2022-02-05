@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 0e81d6a1b8e718e4dbf86194bbf908b2
+guid: 797b2e0848f3a8049a91933a3d5635bf
 TextureImporter:
   fileIDToRecycleName:
-    21300000: screenFrameSheet_0
-    21300002: screenFrameSheet_1
-    21300004: screenFrameSheet_2
-    21300006: screenFrameSheet_3
-    21300008: screenFrameSheet_4
-    21300010: screenFrameSheet_5
+    21300000: screenFrameSheet 1_0
+    21300002: screenFrameSheet 1_1
+    21300004: screenFrameSheet 1_2
+    21300006: screenFrameSheet 1_3
+    21300008: screenFrameSheet 1_4
+    21300010: screenFrameSheet 1_5
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: screenFrameSheet_0
+      name: screenFrameSheet 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,13 +115,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02abda92e1cb5de4c9472c50712458d6
+      spriteID: c7b4ab17430e88f47a5dadb8a9a9a4ae
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: screenFrameSheet_1
+      name: screenFrameSheet 1_1
       rect:
         serializedVersion: 2
         x: 16
@@ -135,13 +135,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c59db12c0b3cd794a8523e85f57cffe2
+      spriteID: 53c54b39f7688204ca9e00c000a0832a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: screenFrameSheet_2
+      name: screenFrameSheet 1_2
       rect:
         serializedVersion: 2
         x: 32
@@ -155,13 +155,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f467993d4830984c889b08274cf9305
+      spriteID: 52739a182875fd143ae4eeb54ce095db
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: screenFrameSheet_3
+      name: screenFrameSheet 1_3
       rect:
         serializedVersion: 2
         x: 48
@@ -175,13 +175,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6df25b12a3e5edd4db208edecf8ce5ee
+      spriteID: d8902cbe2c9d5144e9e98b55d9e6e9fc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: screenFrameSheet_4
+      name: screenFrameSheet 1_4
       rect:
         serializedVersion: 2
         x: 64
@@ -195,13 +195,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e8424aaac7e8d540aa70af6b854de10
+      spriteID: 1ef09e16320696446b1542b9f1217d0a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: screenFrameSheet_5
+      name: screenFrameSheet 1_5
       rect:
         serializedVersion: 2
         x: 80
@@ -215,7 +215,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dcb1ea4b3b46ad4dab402875e9f8417
+      spriteID: a0822361c91a93f4da770882ac5b4897
       vertices: []
       indices: 
       edges: []
@@ -223,7 +223,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 912c67781030da940a2783fed8156f2a
+    spriteID: 65a0d1adae2af144b9ff89449f1d4468
     vertices: []
     indices: 
     edges: []

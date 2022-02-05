@@ -33,15 +33,27 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void NextScreen(){
-        if(numberScreen == screens.Length - 1){
-            Debug.Log("EndLevelGG");
-        } else{
+        // if(numberScreen == screens.Length - 1){
+        //     Debug.Log("EndLevelGG");
+        // } else{
             Destroy(copyScreens[numberScreen]);
             numberScreen++;
             screens[numberScreen].GetComponent<Screen>().respawnPlace = screens[numberScreen-1].GetComponent<Screen>().respawnPlace;
             copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
             copyScreens[numberScreen].SetActive(true);
-        }
+        // }
 
+    }
+
+    public Screen GetCurrentScreen(){
+        return screens[numberScreen].GetComponent<Screen>();
+    }
+
+    public bool IsLastScreen(){
+        if(numberScreen == screens.Length - 1){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

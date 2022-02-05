@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: 45edcff5dfa723646957f8c90df93e3b
+guid: 58bee915eec706349ad9bd08357d6724
 TextureImporter:
   fileIDToRecycleName:
-    21300000: abilityDespenserSheet_0
-    21300002: abilityDespenserSheet_1
-    21300004: abilityDespenserSheet_2
-    21300006: abilityDespenserSheet_3
+    21300000: abilityDespenserSheet 1_0
+    21300002: abilityDespenserSheet 1_1
+    21300004: abilityDespenserSheet 1_2
+    21300006: abilityDespenserSheet 1_3
+    21300008: abilityDespenserSheet 1_4
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -99,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: abilityDespenserSheet_0
+      name: abilityDespenserSheet 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,13 +114,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36b6ebef6a0efee4686420fe1d517cf8
+      spriteID: a59592db908f3a443b930bf95edbf53e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abilityDespenserSheet_1
+      name: abilityDespenserSheet 1_1
       rect:
         serializedVersion: 2
         x: 8
@@ -133,13 +134,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae9d2176af60d4c43aa8614fae367174
+      spriteID: 6744bdc1c9258a0448ee970931b57957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abilityDespenserSheet_2
+      name: abilityDespenserSheet 1_2
       rect:
         serializedVersion: 2
         x: 16
@@ -153,13 +154,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1c9f8033b1a0a24889da6578d401728
+      spriteID: 10186ca937d1dd44da70694b82ea1129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: abilityDespenserSheet_3
+      name: abilityDespenserSheet 1_3
       rect:
         serializedVersion: 2
         x: 24
@@ -173,7 +174,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6bb91c1f49522f40aeec65354cd8c58
+      spriteID: 60acf75eaa30cb648954dba0cad9d4ac
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abilityDespenserSheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1487b911566a027449363f6d012bcd16
       vertices: []
       indices: 
       edges: []
@@ -181,7 +202,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b60ce40dc21ee4a41b2cf8bbd2d1be3b
+    spriteID: 4460c8f1a5a2a3b419fdaf88f7bb7f43
     vertices: []
     indices: 
     edges: []

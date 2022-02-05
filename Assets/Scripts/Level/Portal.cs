@@ -11,6 +11,8 @@ public class Portal : MonoBehaviour
     void Start(){
         timeElapsed = 0;
         isUp = false;
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     void Update()
@@ -28,5 +30,9 @@ public class Portal : MonoBehaviour
             timeElapsed = 0;
         }
 
+    }
+
+    private void OnGameStateChanged(GameState newGameState){
+        enabled = newGameState == GameState.Gameplay;
     }
 }

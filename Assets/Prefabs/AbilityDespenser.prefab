@@ -96,4 +96,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 4096
-  spriteArray: []
+  spriteArray:
+  - {fileID: 21300002, guid: 58bee915eec706349ad9bd08357d6724, type: 3}
+  - {fileID: 21300004, guid: 58bee915eec706349ad9bd08357d6724, type: 3}
+  - {fileID: 21300006, guid: 58bee915eec706349ad9bd08357d6724, type: 3}
+  - {fileID: 21300008, guid: 58bee915eec706349ad9bd08357d6724, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6868186035970837501}
   - component: {fileID: 6868186035970837500}
   - component: {fileID: 6868186035970837503}
+  - component: {fileID: 7158148568219115539}
   m_Layer: 0
   m_Name: Spike
   m_TagString: PainfulTrap
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6868186035970837498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0045, y: 0.026, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,7 +88,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6868186035970837498}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -106,3 +107,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!68 &7158148568219115539
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868186035970837498}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.24987346, y: -0.24998721}
+  - {x: -0.24968685, y: -0.12542021}
+  - {x: -0.18679531, y: -0.124220006}
+  - {x: -0.18758555, y: 0.00005583465}
+  - {x: -0.12471138, y: 0}
+  - {x: -0.12512103, y: 0.12406016}
+  - {x: -0.06256649, y: 0.12495873}
+  - {x: -0.061748102, y: 0.250169}
+  - {x: 0.06244488, y: 0.2500718}
+  - {x: 0.062522314, y: 0.12480705}
+  - {x: 0.12523286, y: 0.12504944}
+  - {x: 0.12527052, y: -0.000076590106}
+  - {x: 0.15834098, y: 0.000010522082}
+  - {x: 0.187206, y: -0.00007370487}
+  - {x: 0.18754104, y: -0.12489914}
+  - {x: 0.25004485, y: -0.12501729}
+  - {x: 0.24986848, y: -0.25000304}
