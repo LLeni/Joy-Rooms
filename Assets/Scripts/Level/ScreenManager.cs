@@ -49,6 +49,10 @@ public class ScreenManager : MonoBehaviour
         return screens[numberScreen].GetComponent<Screen>();
     }
 
+    public int GetNumberScreen(){
+        return numberScreen;
+    }
+
     public bool IsLastScreen(){
         if(numberScreen == screens.Length - 1){
             return true;

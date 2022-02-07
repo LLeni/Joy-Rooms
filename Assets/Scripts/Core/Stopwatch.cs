@@ -6,13 +6,11 @@ using TMPro;
 
 public class Stopwatch : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI levelTimeText;
-    [SerializeField] private TextMeshProUGUI screenTimeText;
 
     private float currentLevelTime;
     private float currentScreenTime;
 
-    public Stopwatch instance;
+    public static Stopwatch instance;
 
     void Start()
     {
@@ -26,11 +24,6 @@ public class Stopwatch : MonoBehaviour
     {
         currentLevelTime += Time.deltaTime;
         currentScreenTime += Time.deltaTime;
-
-        TimeSpan levelTime = TimeSpan.FromSeconds(currentLevelTime);
-        TimeSpan screenTime  = TimeSpan.FromSeconds(currentScreenTime);
-        levelTimeText.text =  "Level Time:          " + (levelTime.Minutes < 10 ? "0": "") + levelTime.Minutes.ToString()  + ":" + (levelTime.Seconds < 10 ? "0": "") + levelTime.Seconds.ToString() + "." + levelTime.Milliseconds.ToString();
-        screenTimeText.text =  "Room Time:         " + (screenTime.Minutes < 10 ? "0": "") + screenTime.Minutes.ToString() + ":" + (screenTime.Seconds < 10 ? "0": "") + screenTime.Seconds.ToString() + "." + screenTime.Milliseconds.ToString();
     }
 
     public void ResetLevelTime(){

@@ -20,13 +20,6 @@ public class Portal : MonoBehaviour
         timeElapsed++;
         if(timeElapsed == timeToRotate){
             transform.Rotate(Vector3.forward * -10);
-            // if(isUp){
-            //     transform.position = new Vector2(transform.position.x, transform.position.y - 1);
-            //     isUp = false;
-            // } else {
-            //     transform.position = new Vector2(transform.position.x, transform.position.y + 1);
-            //     isUp = true;
-            // }
             timeElapsed = 0;
         }
 

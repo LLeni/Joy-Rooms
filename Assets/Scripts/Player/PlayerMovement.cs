@@ -126,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
             //platformGameObject = null;
             transform.SetParent(collision.gameObject.transform);
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -134,4 +135,5 @@ public class PlayerMovement : MonoBehaviour
             transform.SetParent(null);
         }
     }
+
 }

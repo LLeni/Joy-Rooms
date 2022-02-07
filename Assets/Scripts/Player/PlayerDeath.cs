@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
 
-    private void OnCollisionEnter2D(Collision2D collition)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collition.gameObject.CompareTag("Enemy") || collition.gameObject.CompareTag("PainfulTrap")){
-            Destroy(gameObject);
-            ScreenManager.instance.RestartScreen();
+        if(collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("PainfulTrap")){
+            GameManager.instance.RestartScreen();
+            Destroy(gameObject); 
         }
     }
 }

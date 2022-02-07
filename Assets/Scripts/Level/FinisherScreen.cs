@@ -10,7 +10,7 @@ public class FinisherScreen : MonoBehaviour
     {
         Collider2D collision = Physics2D.OverlapCircle(transform.position, 0.01f, playerMask); 
         if(collision != null){
-            ScreenManager.instance.NextScreen();
+            GameManager.instance.EndScreen();
         }
     }
 }
