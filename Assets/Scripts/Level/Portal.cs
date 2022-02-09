@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
         timeElapsed = 0;
         isUp = false;
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+       // GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     void Update()

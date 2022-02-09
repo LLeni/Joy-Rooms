@@ -5,18 +5,21 @@ using System.Data;
 using Mono.Data.Sqlite;
 using System.IO;
 
-public class DBConnect
+public class DBConnector
 {
     // Start is called before the first frame update
-    private const string fileName = "db.bytes";
+    private const string fileName = "Data\\recordsJoyRooms.bytes";
     private static string DBPath;
     private static SqliteConnection connection;
     private static SqliteCommand command;
+    
 
 
-    static DBConnect()
+    static DBConnector()
     {
+        
         DBPath = GetDatabasePath();
+   
     }
 
     private static string GetDatabasePath()
@@ -36,12 +39,12 @@ public class DBConnect
         File.WriteAllBytes(toPath, reader.bytes);
     }
 
-    // private static void OpenConnection()
-    // {
-    //     connection = new SqliteConnection("Data Source=" + DBPath);
-    //     command = new SqliteCommand(connection);
-    //     connection.Open();
-    // }
+    private static void OpenConnection()
+    {
+        connection = new SqliteConnection("Data Source=" + DBPath);
+        command = new SqliteCommand(connection);
+        connection.Open();
+    }
 
     public static void CloseConnection()
     {
@@ -49,11 +52,10 @@ public class DBConnect
         command.Dispose();
     }
 
-    /// <summary> Этот метод выполняет запрос query. </summary>
-    /// <param name="query"> Собственно запрос. </param>
+
     public static void ExecuteQueryWithoutAnswer(string query)
     {
-     //   OpenConnection();
+        OpenConnection();
         command.CommandText = query;
         command.ExecuteNonQuery();
         CloseConnection();
@@ -62,7 +64,7 @@ public class DBConnect
 
     public static string ExecuteQueryWithAnswer(string query)
     {
-        //OpenConnection();
+        OpenConnection();
         command.CommandText = query;
         var answer = command.ExecuteScalar();
         CloseConnection();
@@ -73,8 +75,7 @@ public class DBConnect
 
     public static DataTable GetTable(string query)
     {
-        //OpenConnection();
-
+        OpenConnection();
         SqliteDataAdapter adapter = new SqliteDataAdapter(query, connection);
 
         DataSet DS = new DataSet();

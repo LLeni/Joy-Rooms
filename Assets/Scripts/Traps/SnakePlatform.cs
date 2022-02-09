@@ -41,7 +41,7 @@ public class SnakePlatform : MonoBehaviour
             DrawPath();
         }
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+       // GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     // Update is called once per frame

@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResultsManager : MonoBehaviour
+public class ScreenEvaluation : MonoBehaviour
 {
-    
-
-    public static ResultsManager instance;
-
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+        
     }
 
     // Update is called once per frame

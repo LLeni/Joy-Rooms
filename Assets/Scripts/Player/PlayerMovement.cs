@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         localScaleVector = transform.localScale;
         currentAbility = null;
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+       // GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private  void Update()

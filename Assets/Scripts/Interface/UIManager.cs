@@ -31,11 +31,8 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
-        TimeSpan levelTime = TimeSpan.FromSeconds(Stopwatch.instance.GetLevelTime());
-        TimeSpan screenTime  = TimeSpan.FromSeconds(Stopwatch.instance.GetScreenTime());
-        levelTimeText.text =  "Level Time:          " + (levelTime.Minutes < 10 ? "0": "") + levelTime.Minutes.ToString()  + ":" + (levelTime.Seconds < 10 ? "0": "") + levelTime.Seconds.ToString() + "." + levelTime.Milliseconds.ToString();
-        screenTimeText.text =  "Room Time:         " + (screenTime.Minutes < 10 ? "0": "") + screenTime.Minutes.ToString() + ":" + (screenTime.Seconds < 10 ? "0": "") + screenTime.Seconds.ToString() + "." + screenTime.Milliseconds.ToString();
-    
+        levelTimeText.text =  "Level Time:          " + Stopwatch.instance.GetLevelTime().Substring(3);
+        screenTimeText.text =  "Room Time:         " + Stopwatch.instance.GetScreenTime().Substring(3);
     }
 
     public void ShowPauseMenu(){
@@ -60,8 +57,12 @@ public class UIManager : MonoBehaviour
         screenFramesPanel.gameObject.transform.GetChild(numberScreen).gameObject.GetComponent<Image>().sprite = screenFrameSprites[1];
     }
 
-    public void SetMarkText(int numberScreen, string mark){
-         screenFramesPanel.gameObject.transform.GetChild(numberScreen).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = mark;
+    public void SetMarkText(int numberScreen, char mark){
+         screenFramesPanel.gameObject.transform.GetChild(numberScreen).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = mark.ToString();
+    }
+
+    public void ShowResults(){
+
     }
 
 }

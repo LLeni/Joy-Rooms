@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour
+public class PauseMenuController : MonoBehaviour
 {
 
     [SerializeField] private GameObject[] buttonContainers;
@@ -49,10 +49,11 @@ public class MenuController : MonoBehaviour
         if(Input.GetKeyDown("return")){
             switch(idCurrentButton){
                 case 0:
-                    GameStateManager.Instance.SetState(GameState.Gameplay);
+                    GameManager.instance.ResumeGame();
                     UIManager.instance.HidePauseMenu();
                     break;
                 case 1:
+                    GameManager.instance.ResumeGame();
                     UIManager.instance.HidePauseMenu();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     break;

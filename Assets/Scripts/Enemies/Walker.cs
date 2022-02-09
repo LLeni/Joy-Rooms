@@ -24,7 +24,7 @@ public class Walker : MonoBehaviour
         isWalking = true;
         isTurning = false;
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        //GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     // Update is called once per frame

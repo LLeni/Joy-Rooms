@@ -21,7 +21,7 @@ public class ScreenManager : MonoBehaviour
         numberScreen = 0;
         copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
         copyScreens[numberScreen].SetActive(true);
-        Instantiate(playerPrefab, screens[numberScreen].GetComponent<Screen>().respawnPlace.position, Quaternion.identity);
+        Instantiate(playerPrefab, screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace.position, Quaternion.identity);
     }
 
 
@@ -29,20 +29,15 @@ public class ScreenManager : MonoBehaviour
         Destroy(copyScreens[numberScreen]);
         copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
         copyScreens[numberScreen].SetActive(true);
-        Instantiate(playerPrefab, screens[numberScreen].GetComponent<Screen>().respawnPlace.position, Quaternion.identity);
+        Instantiate(playerPrefab, screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace.position, Quaternion.identity);
     }
 
     public void NextScreen(){
-        // if(numberScreen == screens.Length - 1){
-        //     Debug.Log("EndLevelGG");
-        // } else{
-            Destroy(copyScreens[numberScreen]);
-            numberScreen++;
-            screens[numberScreen].GetComponent<Screen>().respawnPlace = screens[numberScreen-1].GetComponent<Screen>().respawnPlace;
-            copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
-            copyScreens[numberScreen].SetActive(true);
-        // }
-
+        Destroy(copyScreens[numberScreen]);
+        numberScreen++;
+        screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace = screens[numberScreen-1].GetComponent<ScreenContainer>().respawnPlace;
+        copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
+        copyScreens[numberScreen].SetActive(true);
     }
 
     public Screen GetCurrentScreen(){
