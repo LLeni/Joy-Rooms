@@ -57,4 +57,8 @@ public class ScreenManager : MonoBehaviour
             return false;
         }
     }
+
+    public Vector2 GetPosCurrentRespawn(){
+        return screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace.position;
+    }
 }

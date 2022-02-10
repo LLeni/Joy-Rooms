@@ -7078,6 +7078,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cde77dd94a61b548a586e826978264f, type: 3}
+--- !u!1 &819268566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2456849492964858883, guid: 53b52cd6b6f229f4e8465ca026ec37d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1341701269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &819268569
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819268566}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.5, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &828882769
 GameObject:
   m_ObjectHideFlags: 0
@@ -10051,6 +10083,8 @@ MonoBehaviour:
   screenFrameSprites:
   - {fileID: 21300000, guid: cb691505310258e4b8c5b5895ab6c97c, type: 3}
   - {fileID: 21300002, guid: cb691505310258e4b8c5b5895ab6c97c, type: 3}
+  abilityPanel: {fileID: 208284210}
+  blankAbilitySprite: {fileID: 21300000, guid: 58bee915eec706349ad9bd08357d6724, type: 3}
 --- !u!4 &1162739672
 Transform:
   m_ObjectHideFlags: 0
@@ -11685,7 +11719,7 @@ PrefabInstance:
     - target: {fileID: 2456849492964858880, guid: 53b52cd6b6f229f4e8465ca026ec37d1,
         type: 3}
       propertyPath: abilityName
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2456849492964858881, guid: 53b52cd6b6f229f4e8465ca026ec37d1,
         type: 3}
@@ -12865,6 +12899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: 910bd754b765b1d4195a586bba884849, type: 2}
+  playerPrefab: {fileID: 0}
 --- !u!1 &1551704641
 GameObject:
   m_ObjectHideFlags: 0

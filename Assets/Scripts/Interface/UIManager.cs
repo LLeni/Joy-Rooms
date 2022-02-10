@@ -22,6 +22,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject screenFramesPanel;
     [SerializeField] private Sprite[] screenFrameSprites;
 
+    [SerializeField] private GameObject abilityPanel;
+
+    [SerializeField] private Sprite blankAbilitySprite;
+
     public static UIManager instance;
 
     void Start()
@@ -123,6 +127,14 @@ public class UIManager : MonoBehaviour
             screenTimePanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Time  Need for S:   " + RecordsManager.instance.GetSpecificEvaluation(idScreens[i], 'S').Substring(3);
             screenTimePanel.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your record:                 " + screenResult.GetTimeRunRecord().Substring(3) + (ResultsManager.instance.IsNewRecordScreen(i) ? " [New]" : "");
         }
+    }
+
+    public void SetAbilityImage(Sprite abilitySprite){
+        abilityPanel.GetComponent<Image>().sprite = abilitySprite;
+    }
+
+    public void RefreshAbilityImage(){
+        abilityPanel.GetComponent<Image>().sprite = blankAbilitySprite;
     }
 
 }

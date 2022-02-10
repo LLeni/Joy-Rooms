@@ -46,9 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     private  void Update()
     {
-        if(isAbilityDespenserNear()){
-            Debug.Log("Оно живое");
-        }
 
         float horizontalInput = Input.GetAxis("Horizontal") * speed;
         animator.SetFloat("horizontalSpeed", Mathf.Abs(horizontalInput));
@@ -59,24 +56,25 @@ public class PlayerMovement : MonoBehaviour
         } else if(horizontalInput < -0.01f){
             sprite.flipX = true;
         }
+
+
         PerformAction();
         Recover();
-    }
-
-    private bool isAbilityDespenserNear(){
-        Collider2D collision = Physics2D.OverlapCircle(transform.position, 1.10f, abilityDespenserLayer); 
-        if(collision != null){
-            return true;
-        } else {
-            return false;
-        }
-
+        CheckAbilityDespeserHit();
     }
 
 
     private void Recover(){
-        if(isGrounded()){
+        if(IsGrounded()){
             currentCountActions = 0;
+        }
+    }
+
+    private void CheckAbilityDespeserHit(){
+        Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(1,1), 0, abilityDespenserLayer);
+  
+        if(hit != null){
+            currentAbility = hit.gameObject.GetComponent<AbilityDespenser>().GetAbility();
         }
     }
 
@@ -91,8 +89,10 @@ public class PlayerMovement : MonoBehaviour
              body.velocity = new Vector2(body.velocity.x, maxJumpVelocity);
                     Debug.Log("Прыыыгаем" + currentCountActions);
              }
+
              if(currentCountActions == 1){
-                 //Используем навык
+                if(currentAbility != null)
+                    currentAbility.UseAbility(this.gameObject);
              }
         }
 
@@ -106,10 +106,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private bool isGrounded(){
+    private bool IsGrounded(){
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         
-
         Debug.DrawRay(collider.bounds.center + new Vector3(collider.bounds.extents.x - 0.1f, 0), Vector2.down * (collider.bounds.extents.y + 0.1f), Color.green);
         return raycastHit2D.collider != null;
     }
@@ -117,8 +116,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnGameStateChanged(GameState newGameState){
         enabled = newGameState == GameState.Gameplay;
     }
-
-    private GameObject platformGameObject;
     
     private void OnCollisionEnter2D(Collision2D collision)
     {

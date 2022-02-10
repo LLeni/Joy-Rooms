@@ -14,19 +14,25 @@ public class PlayerAbility : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Collider2D hit = Physics2D.OverlapPoint(transform.position, abilityDespenserLayer);
+    // // Update is called once per frame
+    // void Update()
+    // {
+    //     Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(10,10), 0, abilityDespenserLayer);
+  
+    //     if(hit != null){
+    //         ability = hit.gameObject.GetComponent<AbilityDespenser>().GetAbility();
+    //         Debug.Log("in update");
+    //         Debug.Log(ability == null);
+    //     } else {
+    //     }
 
-        if(hit != null){
-            ability = hit.gameObject.GetComponent<AbilityDespenser>().GetAbility();
-            Debug.Log("in update");
-                    Debug.Log(ability == null);
-        }
+    //     if(ability != null){
+    //         ability.UseAbility(this.transform.parent.gameObject);
+    //     }
+    // }
 
-        if(ability != null){
-            ability.UseAbility(this.gameObject);
-        }
-    }
+    // public Ability GetAbility(){
+    //     return ability;
+    // }
+
 }

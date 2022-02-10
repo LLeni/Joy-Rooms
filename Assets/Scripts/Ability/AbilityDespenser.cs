@@ -17,12 +17,15 @@ public class AbilityDespenser : MonoBehaviour
         Refresh
     }
 
+    void Update(){
+        CheckAbilityDespeserHit();
+    }
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         switch(abilityName){
             case AbilityName.Dash: 
-                Debug.Log("куку");
                 ability = new Dash();
                 spriteRenderer.sprite = spriteArray[0];
                 break;
@@ -40,15 +43,23 @@ public class AbilityDespenser : MonoBehaviour
                 break;
         }
 
-        Debug.Log("ability check = " + (ability == null));
 
-        Debug.Log("check dash: " + (new Dash() == null));
+
+    }
+
+    private void CheckAbilityDespeserHit(){
+        Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(1,1), 0, playerLayer);
+  
+        if(hit != null){
+            UIManager.instance.SetAbilityImage(spriteRenderer.sprite);
+            Debug.Log("DDDDD");
+            
+        }
     }
 
 
 
     public Ability GetAbility(){
-        Debug.Log("kinda ability = " + (ability == null));
         return ability;
     }
     

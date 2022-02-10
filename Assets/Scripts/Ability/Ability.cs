@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : MonoBehaviour
+public interface Ability
 {
     // Start is called before the first frame update
-    public abstract void UseAbility(GameObject player);
+    void UseAbility(GameObject player);
 }

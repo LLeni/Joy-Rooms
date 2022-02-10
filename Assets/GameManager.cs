@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Level level;
+    public GameObject playerPrefab;
+
+    private GameObject currentPlayer;
     public static GameManager instance;
 
     private int amountDeath;
@@ -54,7 +57,7 @@ public class GameManager : MonoBehaviour
             Stopwatch.instance.ResetScreenTime();
             UIManager.instance.ChangeScreenFrame(ScreenManager.instance.GetNumberScreen());
             UIManager.instance.SetNameScreenText((ScreenManager.instance.GetNumberScreen() + 1) + "/" + level.screensNames.Length + ": " +level.screensNames[ScreenManager.instance.GetNumberScreen()]);
-       
+            UIManager.instance.RefreshAbilityImage();
         }
     }
 
@@ -76,6 +79,10 @@ public class GameManager : MonoBehaviour
 
     public Level GetLevel(){
         return level;
+    }
+
+    public void SpawnPlayer(){
+        currentPlayer = Instantiate(playerPrefab, ScreenManager.instance.GetPosCurrentRespawn(), Quaternion.identity);
     }
 
 }
