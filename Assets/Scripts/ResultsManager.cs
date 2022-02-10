@@ -40,6 +40,7 @@ public class ResultsManager : MonoBehaviour
                     RecordsManager.instance.UpdateRecord(resultLevel);
                 }
             } else {
+                  isNewRecordLevel = true;
                   RecordsManager.instance.AddNewRecord(resultLevel);
             }
         }

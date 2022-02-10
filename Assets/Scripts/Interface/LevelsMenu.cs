@@ -24,7 +24,6 @@ public class LevelsMenu : MonoBehaviour
 
     private float timeElapsed;
 
-
     private int numberSelectedLevel; //Из массива levels
 
     private int numberLastAvailableLevel;
@@ -51,6 +50,8 @@ public class LevelsMenu : MonoBehaviour
 
             buttonContainers[START_LEVEL_BUTTONS].transform.GetChild(3).gameObject.SetActive(true);
             buttonContainers[START_LEVEL_BUTTONS].transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>().text = "-";
+        
+            numberLastAvailableLevel = START_LEVEL_BUTTONS;
         } else {
             int numberLastFinishedLevel = START_LEVEL_BUTTONS;
             for(int i = 0; i < levels.Length; i++){
@@ -106,12 +107,31 @@ public class LevelsMenu : MonoBehaviour
             buttonContainers[idCurrentButton].transform.GetChild(0).gameObject.SetActive(true);
         }
 
+        if(Input.GetKeyDown("down")){
+            if(idCurrentButton >= START_LEVEL_BUTTONS){
+                DeactivateSprites(idCurrentButton);
+                idCurrentButton = 0;
+            }
+            timeElapsed = 0;
+            buttonContainers[idCurrentButton].transform.GetChild(0).gameObject.SetActive(true);
+        }
+        if(Input.GetKeyDown("up")){
+            if(idCurrentButton == 0){
+                DeactivateSprites(idCurrentButton);
+                idCurrentButton = START_LEVEL_BUTTONS;
+            }
+            timeElapsed = 0;
+            buttonContainers[idCurrentButton].transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         
         if(Input.GetKeyDown("left")){
             DeactivateSprites(idCurrentButton);
             switch(idCurrentButton){
                 case 0:
+
                     idCurrentButton = numberLastAvailableLevel;
+                                        Debug.Log("lol " + numberLastAvailableLevel);
                     break;
                 case 1:
                     idCurrentButton = 2;

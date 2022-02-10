@@ -50,9 +50,11 @@ public class GameManager : MonoBehaviour
             UIManager.instance.ShowResultsMenu();
         } else{
             ScreenManager.instance.NextScreen();
+            UIManager.instance.SetMarkText(ScreenManager.instance.GetNumberScreen(), '-');
             Stopwatch.instance.ResetScreenTime();
             UIManager.instance.ChangeScreenFrame(ScreenManager.instance.GetNumberScreen());
             UIManager.instance.SetNameScreenText((ScreenManager.instance.GetNumberScreen() + 1) + "/" + level.screensNames.Length + ": " +level.screensNames[ScreenManager.instance.GetNumberScreen()]);
+       
         }
     }
 
