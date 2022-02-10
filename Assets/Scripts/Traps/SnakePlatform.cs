@@ -57,15 +57,24 @@ public class SnakePlatform : MonoBehaviour
             block.transform.position = Vector2.MoveTowards(block.transform.position, nextPos, _speed * Time.deltaTime);
             if(block.transform.position.x == nextPos.x && block.transform.position.y == nextPos.y){
                     ChooseBlockNextPosition(iBlock);
-                    Debug.Log(iBlock + " " + _isStraightPath[iBlock]);
             }
-
         }
     }
 
     private void ChooseBlockNextPosition(int indexBlock){
-
-        if(indexBlock == 0 && _blockIdNextPositions[indexBlock] == 0 || indexBlock == _blocks.Length - 1 && _blockIdNextPositions[indexBlock] == _destinations.Length - 1){ 
+        if(_blocks.Length == 1){
+            if(_isStraightPath[indexBlock] && _blockIdNextPositions[indexBlock] == _destinations.Length - 1){
+                _isStraightPath[indexBlock] = false;
+            }
+            if(!_isStraightPath[indexBlock] && _blockIdNextPositions[indexBlock] == 0){
+                _isStraightPath[indexBlock] = true;
+            }
+            if(_isStraightPath[indexBlock]){
+                _blockIdNextPositions[indexBlock]++;
+            } else {
+                _blockIdNextPositions[indexBlock]--;
+            }
+        } else if(indexBlock == 0 && _blockIdNextPositions[indexBlock] == 0 || indexBlock == _blocks.Length - 1 && _blockIdNextPositions[indexBlock] == _destinations.Length - 1){ 
 
             //Делает один шаг для всех блоков, чтобы не было разрыва
             for (int i = 0; i < _blocks.Length; i++)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Level level;
+    [SerializeField] private bool isTesting;
     public GameObject playerPrefab;
 
     private GameObject currentPlayer;
@@ -20,11 +21,10 @@ public class GameManager : MonoBehaviour
         instance = this;
 
 
-        //TODO
-        //Временные объявления
-        //Они должны быть первый при выборе профиля, второй при выборе уровня
-        //Session.currentProfile = new Profile(0, "itLLeni");
-       // Session.currentLevel = new Section(1, "After Conveyor Bell", new Dictionary<char, float>());
+        if(isTesting)
+            Session.currentProfile = new Profile(0, "itLLeni");
+
+        SpawnPlayer();
     }
 
     void Update(){
@@ -57,11 +57,14 @@ public class GameManager : MonoBehaviour
             Stopwatch.instance.ResetScreenTime();
             UIManager.instance.ChangeScreenFrame(ScreenManager.instance.GetNumberScreen());
             UIManager.instance.SetNameScreenText((ScreenManager.instance.GetNumberScreen() + 1) + "/" + level.screensNames.Length + ": " +level.screensNames[ScreenManager.instance.GetNumberScreen()]);
+            
+            //currentPlayer.
             UIManager.instance.RefreshAbilityImage();
         }
     }
 
     public void RestartScreen(){
+        SpawnPlayer();
         ScreenManager.instance.RestartScreen();
         Stopwatch.instance.ResetScreenTime();
         UIManager.instance.SetAmountDeathText(++amountDeath);

@@ -22,7 +22,6 @@ public class ScreenManager : MonoBehaviour
         numberScreen = 0;
         copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
         copyScreens[numberScreen].SetActive(true);
-        Instantiate(playerPrefab, screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace.position, Quaternion.identity);
     }
 
 
@@ -30,7 +29,6 @@ public class ScreenManager : MonoBehaviour
         Destroy(copyScreens[numberScreen]);
         copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
         copyScreens[numberScreen].SetActive(true);
-        Instantiate(playerPrefab, screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace.position, Quaternion.identity);
     }
 
     public void NextScreen(){
