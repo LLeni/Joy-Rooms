@@ -35,14 +35,12 @@ public class ScreenRecordsManager : MonoBehaviour
     }
 
     public char GetMarkRecord(int idSection, string timeRun){
-        Debug.Log(timeRun);
         TimeSpan timeSpanRun = TimeSpan.Parse(timeRun);
         DataTable evaluationsForSection = DBConnector.GetTable($"SELECT evaluationtype.name_evaluationtype, evaluation.timeborder_evaluation FROM evaluation INNER JOIN evaluationtype ON evaluation.id_evaluationtype = evaluationtype.id_evaluationtype WHERE evaluation.id_section = {2} ORDER BY evaluation.timeborder_evaluation DESC");
 
          char currentMark = 'C';
          for(int r = 0; r < evaluationsForSection.Rows.Count; r++){
             TimeSpan timeSpanEvaluation = TimeSpan.Parse(evaluationsForSection.Rows[r][1].ToString());
-            Debug.Log(TimeSpan.Compare(timeSpanRun, timeSpanEvaluation));
             if(TimeSpan.Compare(timeSpanRun, timeSpanEvaluation) <= 0){
                 currentMark = char.Parse(evaluationsForSection.Rows[r][0].ToString());
             }

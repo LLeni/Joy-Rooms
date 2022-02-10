@@ -1,24 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ScreenResultsManager : MonoBehaviour
+using System;
+public class ResultsManager : MonoBehaviour
 {
-    
-    private const string SELECT_CONDITIONS_SECTION_QUERY = "SELECT evaluationtype.name_evaluationtype, evaluation.timeborder_evaluation FROM evaluation INNER JOIN evaluationtype ON evaluation.id_evaluationtype = evaluationtype.id_evaluationtype WHERE evaluation.id_section = 1;";
-    public static ScreenResultsManager instance;
+    public static ResultsManager instance;
 
-    private Section[] currentSections;
+    private Record resultLevel;
+    private Record[] resultsScreens;
 
-    // Start is called before the first frame update
+    private bool isNewRecordLevel;
+    private bool[] isNewRecordScreens;
+
     void Start()
     {
         instance = this;
+        resultsScreens = new Record[5];
+        isNewRecordLevel = false;
+
+        isNewRecordScreens = new bool[5];
+        for(int i = 0; i < isNewRecordScreens.Length; i++){
+            isNewRecordScreens[i] = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SaveResultLevel(int idLevel, string timeRun, int amountDeath){
+        resultLevel = new Record(Session.currentProfile.GetIdProfile(), idLevel, DateTime.Now.ToString("dd.MM.yyyy"), timeRun, amountDeath);
+    }
+
+    public void SaveResultScreen(int orderScreen, int idScreen, string timeRun){
+        resultsScreens[orderScreen] = new Record(Session.currentProfile.GetIdProfile(), idScreen, DateTime.Now.ToString("dd.MM.yyyy"), timeRun, -1);
+    }
+
+    public void UploadResults(){
+        if(resultLevel != null){
+            if(RecordsManager.instance.IsRecordExist(resultLevel)){
+                if(RecordsManager.instance.IsRecordBetter(resultLevel)){
+                    isNewRecordLevel = true;
+                    RecordsManager.instance.UpdateRecord(resultLevel);
+                }
+            } else {
+                  RecordsManager.instance.AddNewRecord(resultLevel);
+            }
+        }
+
+        for(int i = 0; i < resultsScreens.Length; i++){
+            if(resultsScreens[i] != null){
+                if(RecordsManager.instance.IsRecordExist(resultsScreens[i])){
+                    if(RecordsManager.instance.IsRecordBetter(resultsScreens[i])){
+                        isNewRecordScreens[i] = true;
+                        RecordsManager.instance.UpdateRecord(resultsScreens[i]);
+                    }
+                } else {
+                    isNewRecordScreens[i] = true;
+                    RecordsManager.instance.AddNewRecord(resultsScreens[i]);
+                }
+            }
+        }
+
+        for(int i = 0; i < resultsScreens.Length; i++){
+             Debug.Log(i + "      " + isNewRecordScreens[i]);
+            Debug.Log(i + "      " + resultsScreens[i]);
+        }
+    }
+
+    public bool IsNewRecordLevel(){
+        return isNewRecordLevel;
+    }
+
+    public bool IsNewRecordScreen(int orderScreen){
+        return isNewRecordScreens[orderScreen];
+    }
+
+    public Record GetResultLevel(){
+        return resultLevel;
+    }
+
+    public Record GetResultScreen(int orderScreen){
+        return resultsScreens[orderScreen];
     }
 }

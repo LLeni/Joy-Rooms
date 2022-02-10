@@ -9,6 +9,7 @@ public class ScreenManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] screens;
     private GameObject[] copyScreens;
+
     public static ScreenManager instance;
     public GameObject playerPrefab;
 
@@ -38,6 +39,7 @@ public class ScreenManager : MonoBehaviour
         screens[numberScreen].GetComponent<ScreenContainer>().respawnPlace = screens[numberScreen-1].GetComponent<ScreenContainer>().respawnPlace;
         copyScreens[numberScreen] = GameObject.Instantiate(screens[numberScreen], this.transform.parent);
         copyScreens[numberScreen].SetActive(true);
+
     }
 
     public Screen GetCurrentScreen(){

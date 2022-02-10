@@ -15,6 +15,19 @@ public class Record{
         this.amountDeath = amountDeath;
     }
 
+    //Конструктор для сохранения текущих результатов, когда мы еще не уверены в необходимости знания свободного idRecord
+    public Record(int idProfile, int idSection, string dateRecord, string timeRunRecord, int amountDeath){
+        this.idProfile = idProfile;
+        this.idSection = idSection;
+        this.dateRecord = dateRecord;
+        this.timeRunRecord = timeRunRecord;
+        this.amountDeath = amountDeath;
+    }
+
+    public void SetIdRecord(int idRecord){
+        this.idRecord = idRecord;
+    }
+
     public int GetIdRecord(){
         return idRecord;
     }

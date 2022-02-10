@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\ResultsMenu.cs" />
      <Compile Include="Assets\Scripts\Ability\Ability.cs" />
      <Compile Include="Assets\Scripts\Ability\AbilityDespenser.cs" />
      <Compile Include="Assets\Scripts\Ability\Dash.cs" />

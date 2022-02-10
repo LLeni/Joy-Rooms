@@ -34,6 +34,8 @@ public class LevelsMenu : MonoBehaviour
         //TODO: Временно то, что снизу - убрать после
         //Session.currentProfile = new Profile(0, "itLLeni");
 
+        Debug.Log(Application.persistentDataPath);
+
         isActive = false;
         idCurrentButton = START_LEVEL_BUTTONS;
         timeElapsed = 0;
@@ -203,11 +205,11 @@ public class LevelsMenu : MonoBehaviour
         levelInformationPanel.transform.GetChild(0).gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = mark.ToString();
 
         //Times Level
-        timePanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Time  Need for J: " + RecordsManager.instance.GetSpecificEvaluation(idLevel, 'J').Substring(3);
+        timePanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Time  Need for J:   " + RecordsManager.instance.GetSpecificEvaluation(idLevel, 'J').Substring(3);
 
         if(isHaveRecord){
             Record levelRecord = RecordsManager.instance.GetRecord(Session.currentProfile.GetIdProfile(), idLevel);
-            timePanel.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your record:               " + levelRecord.GetTimeRunRecord().Substring(3);;
+            timePanel.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your record:                 " + levelRecord.GetTimeRunRecord().Substring(3);;
             
             //Amount Death Level
             deathPanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "x " + levelRecord.GetAmountDeath();
@@ -217,14 +219,12 @@ public class LevelsMenu : MonoBehaviour
         GameObject screenPanel;
         GameObject screenFrame;
         GameObject screenTimePanel;
-        GameObject screenDeathPanel;
         Record recordScreen;
         for(int i = 0; i < idScreens.Length; i++){
             screenPanel = descriptionPanel.transform.GetChild(3 + i).gameObject;
             screenFrame = screenPanel.transform.GetChild(0).gameObject;
             screenTimePanel = screenPanel.transform.GetChild(1).gameObject;
-            screenDeathPanel = screenPanel.transform.GetChild(2).gameObject;
-            Debug.Log(screenTimePanel + " " + screenDeathPanel);
+
             recordScreen = RecordsManager.instance.GetRecord(Session.currentProfile.GetIdProfile(), idScreens[i]);
             
             //Mark Screen
@@ -238,13 +238,9 @@ public class LevelsMenu : MonoBehaviour
             screenFrame.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = levels[numberSelectedLevel].screensNames[i];
         
             //Times Screen
-            screenTimePanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Time  Need for S: " + RecordsManager.instance.GetSpecificEvaluation(idScreens[i], 'S').Substring(3);
+            screenTimePanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Time  Need for S:   " + RecordsManager.instance.GetSpecificEvaluation(idScreens[i], 'S').Substring(3);
             if(recordScreen != null)
-                screenTimePanel.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your record:               " + recordScreen.GetTimeRunRecord().Substring(3);;
-            
-            //Amount Death Screen
-            if(recordScreen != null)
-                screenDeathPanel.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "x " + recordScreen.GetAmountDeath();
+                screenTimePanel.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your record:                 " + recordScreen.GetTimeRunRecord().Substring(3);
         }
     }
 

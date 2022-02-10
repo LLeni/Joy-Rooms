@@ -8,7 +8,7 @@ using System.IO;
 public class DBConnector
 {
     // Start is called before the first frame update
-    private const string fileName = "Data\\recordsJoyRooms.bytes";
+    private const string fileName = "recordsJoyRooms.bytes";
     private static string DBPath;
     private static SqliteConnection connection;
     private static SqliteCommand command;
@@ -17,21 +17,21 @@ public class DBConnector
 
     static DBConnector()
     {
-        
+        Debug.Log("haha, psych");
         DBPath = GetDatabasePath();
    
     }
 
     private static string GetDatabasePath()
     {
-        string filePath = Path.Combine(Application.dataPath, fileName);
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         if(!File.Exists(filePath)) UnpackDatabase(filePath);
         return filePath;
     }
 
     private static void UnpackDatabase(string toPath)
     {
-        string fromPath = Path.Combine(Application.dataPath, fileName);
+        string fromPath = Path.Combine(Application.streamingAssetsPath, fileName);
 
         WWW reader = new WWW(fromPath);
         while (!reader.isDone) { }

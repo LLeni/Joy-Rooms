@@ -60,6 +60,7 @@ public class PauseMenuController : MonoBehaviour
                 case 2:
                     break;
                 case 3:
+                    ResultsManager.instance.UploadResults();
                     SceneManager.LoadScene("LevelMenu");
                     break;
             }

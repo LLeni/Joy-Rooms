@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    [SerializeField] private Level level;
     public static GameManager instance;
 
     private int amountDeath;
 
-    void Awake(){
+    void Start(){
         Application.targetFrameRate = 300;
         amountDeath = 0;
+        GameStateManager.Instance.SetState(GameState.Gameplay);
+
         instance = this;
 
 
         //TODO
         //Временные объявления
         //Они должны быть первый при выборе профиля, второй при выборе уровня
-        Session.currentProfile = new Profile(0, "itLLeni");
-        Session.currentLevel = new Section(1, "After Conveyor Bell", new Dictionary<char, float>());
+        //Session.currentProfile = new Profile(0, "itLLeni");
+       // Session.currentLevel = new Section(1, "After Conveyor Bell", new Dictionary<char, float>());
     }
 
     void Update(){
 
-       // Debug.Log(ScreenRecordsManager.instance.GetMarkRecord(1, "00:01:05"));
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameState currentGameState = GameStateManager.Instance.CurrentGameState;
             if(currentGameState == GameState.Gameplay){
@@ -40,13 +41,19 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndScreen(){
-        if(ScreenManager.instance.IsLastScreen()){
-            UIManager.instance.ShowResults();
-        }
+        ResultsManager.instance.SaveResultScreen(ScreenManager.instance.GetNumberScreen(),SectionManager.instance.GetIdSection(level.screensNames[ScreenManager.instance.GetNumberScreen()]), Stopwatch.instance.GetScreenTime());
         UIManager.instance.SetMarkText(ScreenManager.instance.GetNumberScreen(), ScreenRecordsManager.instance.GetMarkRecord(ScreenManager.instance.GetNumberScreen(), Stopwatch.instance.GetScreenTime()));
-        ScreenManager.instance.NextScreen();
-        Stopwatch.instance.ResetScreenTime();
-        UIManager.instance.ChangeScreenFrame(ScreenManager.instance.GetNumberScreen());
+        if(ScreenManager.instance.IsLastScreen()){
+            ResultsManager.instance.SaveResultLevel(SectionManager.instance.GetIdSection(level.levelName), Stopwatch.instance.GetLevelTime(), amountDeath);
+            ResultsManager.instance.UploadResults();
+            PauseGame();
+            UIManager.instance.ShowResultsMenu();
+        } else{
+            ScreenManager.instance.NextScreen();
+            Stopwatch.instance.ResetScreenTime();
+            UIManager.instance.ChangeScreenFrame(ScreenManager.instance.GetNumberScreen());
+            UIManager.instance.SetNameScreenText((ScreenManager.instance.GetNumberScreen() + 1) + "/" + level.screensNames.Length + ": " +level.screensNames[ScreenManager.instance.GetNumberScreen()]);
+        }
     }
 
     public void RestartScreen(){
@@ -65,6 +72,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public Level GetLevel(){
+        return level;
+    }
 
 }
 

@@ -11,16 +11,11 @@ public class SectionManager : MonoBehaviour
         instance = this;
     }
 
-    void Update()
-    {
-        
-    }
-
     public int GetIdSection(string nameSection){
         return int.Parse(DBConnector.GetTable($"SELECT section.id_section FROM section WHERE section.name_section = '{nameSection}'").Rows[0][0].ToString());
     }
 
-    public int[] GetChildSection(int idSection){
+    public int[] GetChildrenSection(int idSection){
         DataTable childrenSectionTable = DBConnector.GetTable($"SELECT section.id_section FROM section WHERE section.id_parent_section = {idSection}");
         int[] children = new int[childrenSectionTable.Rows.Count];
         for(int i = 0; i < childrenSectionTable.Rows.Count; i++){

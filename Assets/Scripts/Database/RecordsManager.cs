@@ -23,7 +23,6 @@ public class RecordsManager : MonoBehaviour
     }
 
     public string GetSpecificEvaluation(int idSection, char mark){
-        Debug.Log(idSection + " " + mark);
         DataTable evaluationTable = DBConnector.GetTable($"SELECT evaluation.timeborder_evaluation FROM evaluation INNER JOIN evaluationtype ON evaluation.id_evaluationtype = evaluationtype.id_evaluationtype WHERE evaluation.id_section = {idSection} AND evaluationtype.name_evaluationtype = '{mark.ToString()}';");
         
         if(evaluationTable.Rows.Count == 0){
@@ -66,6 +65,42 @@ public class RecordsManager : MonoBehaviour
             return null;
         } else {
             return nameLastFinishedLevelTable.Rows[0][0].ToString();
+        }
+    }
+
+    public int GetNextAvailableIdRecord(){
+        DataTable maxIdRecordTable = DBConnector.GetTable($"SELECT MAX(record.id_record) FROM record");
+
+        return int.Parse(maxIdRecordTable.Rows[0][0].ToString()) + 1;
+    }
+
+    public void AddNewRecord(Record record){
+        Debug.Log("idSection = " + record.GetIdSection());
+        DBConnector.ExecuteQueryWithoutAnswer($"INSERT INTO record(id_profile, id_section, date_record, time_run_record, death_count_record) VALUES ({record.GetIdProfile()}, {record.GetIdSection()}, '{record.GetDateRecord()}', '{record.GetTimeRunRecord()}', {record.GetAmountDeath()});");
+    }
+
+    public bool IsRecordBetter(Record record){
+        Record existingRecord = GetRecord(record.GetIdProfile(), record.GetIdSection());
+        if(existingRecord == null){
+            return true;
+        } else{
+            if(TimeSpan.Compare(TimeSpan.Parse(record.GetTimeRunRecord()), TimeSpan.Parse(existingRecord.GetTimeRunRecord())) < 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public void UpdateRecord(Record record){
+        DBConnector.ExecuteQueryWithoutAnswer($"UPDATE record SET  date_record = '{record.GetDateRecord()}', time_run_record = '{record.GetTimeRunRecord()}', death_count_record = {record.GetAmountDeath()} WHERE id_profile = {record.GetIdProfile()} AND id_section = {record.GetIdSection()};");
+    }
+
+    public bool IsRecordExist(Record record){
+        if(GetRecord(record.GetIdProfile(), record.GetIdSection()) == null){
+            return false;
+        } else{
+            return true;
         }
     }
 }
